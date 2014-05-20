@@ -59,6 +59,6 @@ runWireless iface args = do
        else showWithPadding ""
   qb <- showPercentBar qlty (qlty / 100)
   qvb <- showVerticalBar qlty (qlty / 100)
-  qi <- showPercentWithColors (qlty / ((numIcons opts))
+  qi <- showPercentWithColors (qlty / (numIcons opts))
   parseTemplate [ep, q, qb, qvb, qi]
 runWireless _ _ = getConfigValue naString
