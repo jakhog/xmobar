@@ -45,8 +45,8 @@ wirelessConfig :: IO MConfig
 wirelessConfig =
   mkMConfig "<essid> <quality>" ["essid", "quality", "qualitybar", "qualityvbar", "qualityicons"]
 
-runWireless :: [String] -> [String] -> Monitor String
-runWireless (iface:_) args = do
+runWireless :: String -> [String] -> Monitor String
+runWireless iface args = do
   opts <- io $ parseOpts args
   wi <- io $ getWirelessInfo iface
   na <- getConfigValue naString

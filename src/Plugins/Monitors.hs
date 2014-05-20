@@ -152,7 +152,7 @@ instance Exec Monitors where
     start (DiskIO s a r) = startDiskIO s a r
     start (Uptime a r) = runM a uptimeConfig runUptime r
 #ifdef IWLIB
-    start (Wireless i a r) = runM (a ++ [i]) wirelessConfig runWireless r
+    start (Wireless i a r) = runM a wirelessConfig (runWireless i) r
 #endif
 #ifdef LIBMPD
     start (MPD a r) = runMD a mpdConfig runMPD r mpdReady
