@@ -16,10 +16,34 @@ module Plugins.Monitors.Wireless (wirelessConfig, runWireless)  where
 
 import Plugins.Monitors.Common
 import IWlib
+import System.Console.GetOpt
+
+data WiOpts = WiOpts 
+  { iconBase :: Maybe String
+  , numIcons :: Integer
+  }
+
+defaultOpts :: WiOpts 
+defaultOpts = WiOpts 
+  { iconBase = Nothing
+  , numIcons = 0
+  }
+
+options :: [OptDescr (WiOpts -> WiOpts)]
+options =
+  [ Option "I" ["iconbase"] (ReqArg (\x o -> o { iconBase = Just x }) "") ""
+  , Option "N" ["numicons"] (ReqArg (\x o -> o { numIcons = read x }) "") ""
+  ]
+
+parseOpts :: [String] -> IO WiOpts 
+parseOpts argv =
+  case getOpt Permute options argv of
+    (o, _, []) -> return $ foldr id defaultOpts o
+    (_, _, errs) -> ioError . userError $ concat errs
 
 wirelessConfig :: IO MConfig
 wirelessConfig =
-  mkMConfig "<essid> <quality>" ["essid", "quality", "qualitybar", "qualityvbar"]
+  mkMConfig "<essid> <quality>" ["essid", "quality", "qualitybar", "qualityvbar", "qualityicons"]
 
 runWireless :: [String] -> Monitor String
 runWireless (iface:_) = do
@@ -34,5 +58,6 @@ runWireless (iface:_) = do
        else showWithPadding ""
   qb <- showPercentBar qlty (qlty / 100)
   qvb <- showVerticalBar qlty (qlty / 100)
-  parseTemplate [ep, q, qb, qvb]
+  qi <- qlty / numIcons
+  parseTemplate [ep, q, qb, qvb, qi]
 runWireless _ = getConfigValue naString
