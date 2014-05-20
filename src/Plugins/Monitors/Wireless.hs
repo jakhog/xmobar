@@ -45,6 +45,10 @@ wirelessConfig :: IO MConfig
 wirelessConfig =
   mkMConfig "<essid> <quality>" ["essid", "quality", "qualitybar", "qualityvbar", "qualityicons"]
 
+getIcon :: Maybe String -> Integer -> Float -> String
+getIcon Nothing _ _ = ""
+getIcon s _ _ = s
+
 runWireless :: String -> [String] -> Monitor String
 runWireless iface args = do
   opts <- io $ parseOpts args
@@ -59,6 +63,6 @@ runWireless iface args = do
        else showWithPadding ""
   qb <- showPercentBar qlty (qlty / 100)
   qvb <- showVerticalBar qlty (qlty / 100)
-  qi <- showPercentWithColors (qlty - (numIcons opts))
+  qi <- getIcon (iconBase opts) (numIcons opts)
   parseTemplate [ep, q, qb, qvb, qi]
 --unWireless _ = getConfigValue naString
