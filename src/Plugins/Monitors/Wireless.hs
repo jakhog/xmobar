@@ -20,7 +20,7 @@ import System.Console.GetOpt
 
 data WiOpts = WiOpts 
   { iconBase :: Maybe String
-  , numIcons :: Integer
+  , numIcons :: Float 
   }
 
 defaultOpts :: WiOpts 
