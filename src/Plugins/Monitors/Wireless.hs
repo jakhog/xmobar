@@ -48,7 +48,7 @@ wirelessConfig =
 getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
-getIcon (Just s) n qlty = show qlty 
+getIcon (Just s) n qlty = show (qlty/100*n)
 
 runWireless :: String -> [String] -> Monitor String
 runWireless iface args = do
