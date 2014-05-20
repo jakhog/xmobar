@@ -61,4 +61,4 @@ runWireless (iface:_) args = do
   qvb <- showVerticalBar qlty (qlty / 100)
   qi <- showPercentWithColors (qlty / 2)
   parseTemplate [ep, q, qb, qvb, qi]
-runWireless _ = getConfigValue naString
+runWireless _ _ = getConfigValue naString
