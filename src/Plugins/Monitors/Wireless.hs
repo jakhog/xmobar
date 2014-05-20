@@ -20,7 +20,7 @@ import System.Console.GetOpt
 
 data WiOpts = WiOpts 
   { iconBase :: Maybe String
-  , numIcons :: Float 
+  , numIcons :: Integer
   }
 
 defaultOpts :: WiOpts 
@@ -59,6 +59,6 @@ runWireless iface args = do
        else showWithPadding ""
   qb <- showPercentBar qlty (qlty / 100)
   qvb <- showVerticalBar qlty (qlty / 100)
-  qi <- showPercentWithColors (qlty / (numIcons opts))
+  qi <- showPercentWithColors (qlty / ((numIcons opts))
   parseTemplate [ep, q, qb, qvb, qi]
 runWireless _ _ = getConfigValue naString
