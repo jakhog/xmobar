@@ -48,13 +48,14 @@ wirelessConfig =
 getStrLength :: Integer -> Integer
 getStrLength n = floor (logBase 10 (fromIntegral n))
 
+getStrInd :: Integer -> Float -> Integer
+getStrInd n qlty = round (qlty/100*(fromIntegral n))
+
 getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
-  ni <- qlty/100*(fromIntegral n)
   len <- getStrLength n
-  --show ()
   show len
 
 runWireless :: String -> [String] -> Monitor String
