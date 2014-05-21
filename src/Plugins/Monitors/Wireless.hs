@@ -55,7 +55,7 @@ getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
-  l <- getStrLength n
+  l <- (getStrLength n)
   show l
 
 runWireless :: String -> [String] -> Monitor String
