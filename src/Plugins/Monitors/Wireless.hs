@@ -50,7 +50,7 @@ getStrLength :: Integer -> Integer
 getStrLength n = floor (logBase 10 (fromIntegral n)) + 1
 
 getStrInd :: Integer -> Float -> Integer
-getStrInd n qlty = round (qlty/100*(fromIntegral n))
+getStrInd n qlty = round (qlty/100*(fromIntegral (n-1)))+1
 
 getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
@@ -58,7 +58,7 @@ getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
   let l = getStrLength n
       suf = printf ("%0"++(show l)++"d") (getStrInd n qlty)
-  suf ++ ".xbm"
+  s ++ suf ++ ".xbm"
 
 runWireless :: String -> [String] -> Monitor String
 runWireless iface args = do
