@@ -16,7 +16,7 @@ module Plugins.Monitors.Wireless (wirelessConfig, runWireless)  where
 
 import Plugins.Monitors.Common
 import IWlib
-import Text
+import Text.Printf
 import System.Console.GetOpt
 
 data WiOpts = WiOpts 
