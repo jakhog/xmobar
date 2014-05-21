@@ -45,13 +45,15 @@ wirelessConfig :: IO MConfig
 wirelessConfig =
   mkMConfig "<essid> <quality>" ["essid", "quality", "qualitybar", "qualityvbar", "qualityicons"]
 
+getStrLength :: Integer -> Integer
+getStrLength n = floor (logBase 10 (fromIntegral n))
+
 getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
   ni <- qlty/100*(fromIntegral n)
-  len :: Integer
-  len <- floor (logBase 10 (fromIntegral n))
+  len <- getStrLength n
   --show ()
   show len
 
