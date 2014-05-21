@@ -49,8 +49,10 @@ getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
+  ni <- qlty/100*(fromIntegral n)
+  len :: Integer
   len <- floor (logBase 10 (fromIntegral n))
-  --show (qlty/100*(fromIntegral n))
+  --show ()
   show len
 
 runWireless :: String -> [String] -> Monitor String
