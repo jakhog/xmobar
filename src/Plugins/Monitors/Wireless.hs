@@ -58,7 +58,7 @@ getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
   let l = getStrLength n
       suf = printf ("%0"++(show l)++"d") (getStrInd n qlty)
-  s ++ suf ++ ".xbm"
+  "<icon=/" ++ s ++ suf ++ ".xbm/>"
 
 runWireless :: String -> [String] -> Monitor String
 runWireless iface args = do
