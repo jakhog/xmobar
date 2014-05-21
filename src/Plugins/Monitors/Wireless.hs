@@ -57,7 +57,7 @@ getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
 getIcon (Just s) n qlty = do
   let l = getStrLength n
-      suf = printf ("%0"++(show n)++"d") (getStrInd n qlty)
+      suf = printf ("%0"++(show l)++"d") (getStrInd n qlty)
   suf ++ ".xbm"
 
 runWireless :: String -> [String] -> Monitor String
