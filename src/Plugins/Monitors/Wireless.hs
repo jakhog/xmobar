@@ -54,9 +54,7 @@ getStrInd n qlty = round (qlty/100*(fromIntegral n))
 getIcon :: Maybe String -> Integer -> Float -> String
 getIcon Nothing _ _ = ""
 getIcon _ 0 _ = ""
-getIcon (Just s) n qlty = do
-  l <- (getStrLength n)
-  show l
+getIcon (Just s) n qlty = show (getStrLength n)
 
 runWireless :: String -> [String] -> Monitor String
 runWireless iface args = do
